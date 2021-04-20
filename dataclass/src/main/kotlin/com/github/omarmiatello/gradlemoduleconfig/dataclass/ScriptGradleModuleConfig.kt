@@ -1,12 +1,12 @@
 package com.github.omarmiatello.gradlemoduleconfig.dataclass
 
-public data class ScriptConfig(
-    val gradleConfig: GradleConfig,
-    val modules: List<GradleComponent>,
-    val logLevel: Int,
-    val hasPrompt: Boolean,
-    val writeOnDisk: Boolean,
-    val forceNamingConvention: Boolean,
+public data class ScriptGradleModuleConfig(
+    val gradleConfig: GradleConfig = GradleConfig("", "", "", "", ""),
+    val modules: List<GradleComponent> = emptyList(),
+    val logLevel: Int = -1,
+    val hasPrompt: Boolean = false,
+    val writeOnDisk: Boolean = false,
+    val forceNamingConvention: Boolean = false,
 ) {
     public fun logV(message: Any?) {
         if (logLevel >= 2) println(message)

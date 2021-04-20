@@ -3,10 +3,9 @@ package com.github.omarmiatello.gradlemoduleconfig.dataclass
 public data class ProjectModule(
     val configModule: GradleModule,
     val configGroups: List<Group>,
-    val config: ScriptConfig,
+    val config: ScriptGradleModuleConfig,
 ) {
-    public val templateName: String =
-        configModule.templateName
+    public val templateName: String = configModule.templateName
 
     public val moduleNameParts: List<String> =
         configGroups.flatMap { it.gradleName.toModuleNameParts() } +
@@ -18,26 +17,30 @@ public data class ProjectModule(
                 if (!config.forceNamingConvention || s.startsWith("$acc-")) s else "$acc-$s"
             }
 
-    public val gradlePath: String =
-        gradlePathParts.joinToString(":", prefix = ":")
+    /**
+     * Full gradle path, e.g., :feature:navigation:core
+     */
+    public val gradlePath: String = gradlePathParts.joinToString(":", prefix = ":")
 
+    /**
+     * Full package name, e.g., com.github.owner.projectname.myfeature
+     */
     public val packageName: String = buildString {
-        append(config.gradleConfig.packagePrefix)
-        append(".")
-        append((configGroups.map { it.packageNamePart } + configModule.packageNamePart).joinToString("."))
+        val prefix = listOf(config.gradleConfig.packagePrefix)
+        val parts = (configGroups.map { it.packageNamePart } + configModule.packageNamePart).filterNotNull()
+            .filter { it.isNotBlank() }
+        append((prefix + parts).joinToString("."))
     }
 
-    public val destinationDirPart: String =
-        gradlePathParts.joinToString("/")
+    public val destinationDirPart: String = gradlePathParts.joinToString("/")
 
-    private fun String.toModuleNameParts(): List<String> =
-        toLowerCase().split("[^a-z0-9]".toRegex())
+    private fun String.toModuleNameParts(): List<String> = toLowerCase().split("[^a-z0-9]".toRegex())
 }
 
-public fun List<GradleComponent>.toProjectModuleList(config: ScriptConfig): List<ProjectModule> =
+public fun List<GradleComponent>.toProjectModuleList(config: ScriptGradleModuleConfig): List<ProjectModule> =
     flatMap { it.toProjectModuleList(config) }
 
-public fun GradleComponent.toProjectModuleList(config: ScriptConfig): List<ProjectModule> =
+public fun GradleComponent.toProjectModuleList(config: ScriptGradleModuleConfig): List<ProjectModule> =
     when (this) {
         is Group -> modules.flatMap {
             it.toProjectModuleList(config)

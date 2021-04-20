@@ -14,15 +14,23 @@ Note: Could be used with Ktor
 
 Add this in your `build.gradle.ktx` file:
 ```kotlin
-implementation("com.github.omarmiatello.gradle-modules-config:script:1.0.0")
+implementation("com.github.omarmiatello.gradle-modules-config:script:1.0.1")
 ```
 
 ## How to use
 
-kscript example:
+#### Edit online your configuration!
+
+Try it on Kotlin Playground https://pl.kotl.in/9oXsIoDNS or [our samples here](https://omarmiatello.github.io/gradle-modules-config/config_online.html)
+
+<iframe src="https://pl.kotl.in/bEJDWFCw6?from=17&to=48"></iframe>
+
+#### kscript example
+
 ```kotlin
 #!/usr/bin/env kscript
-@file:DependsOn("com.github.omarmiatello.gradle-modules-config:script:1.0.0")
+@file:DependsOn("com.github.omarmiatello.gradle-modules-config:script:1.0.1")
+@file:DependsOn("com.offbytwo:docopt:0.6.0.20150202")
 
 /**
  * ### Run script
@@ -61,7 +69,7 @@ Example:
 fun main(args: Array<String>) {
     if (args.isEmpty()) println("For help use: kscript newmodule.kt --help")
 
-    val config = ScriptConfig(
+    val config = ScriptGradleModuleConfig(
         gradleConfig = GradleConfig(
             packagePrefix = "com.github.owner.projectname",
             templatesDirPath = "templates",
@@ -96,7 +104,7 @@ fun main(args: Array<String>) {
 
     // start build modules
     config.parseArgs(args).buildModules(
-        onReplaceMap = { module ->
+        onContentReplace = { module ->
             mapOf(
                 "packagename" to module.packageName,
                 "moduleName" to module.moduleNameParts.joinToString("") { it.capitalize() }.decapitalize(),
@@ -104,10 +112,13 @@ fun main(args: Array<String>) {
                 "module_name" to module.moduleNameParts.joinToString("_")
             )
         },
+        onDirReplace = { module ->
+            mapOf("packagename" to module.packageName.replace('.', '/'))
+        }
     )
 }
 
-fun ScriptConfig.parseArgs(args: Array<String>): ScriptConfig {
+fun ScriptGradleModuleConfig.parseArgs(args: Array<String>): ScriptConfig {
     val map: MutableMap<String, Any> = Docopt(usage).parse(args.toList())
     logV("Script args: $map")
 

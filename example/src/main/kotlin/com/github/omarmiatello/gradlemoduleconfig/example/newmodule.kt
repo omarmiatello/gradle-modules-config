@@ -7,7 +7,7 @@ import com.github.omarmiatello.gradlemoduleconfig.dataclass.GradleConfig
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.Group
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.LibAndroid
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.LibKotlin
-import com.github.omarmiatello.gradlemoduleconfig.dataclass.ScriptConfig
+import com.github.omarmiatello.gradlemoduleconfig.dataclass.ScriptGradleModuleConfig
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.toGradleComponent
 import com.github.omarmiatello.gradlemoduleconfig.script.buildModules
 import org.docopt.Docopt
@@ -37,7 +37,7 @@ Example:
 fun main(args: Array<String>) {
     if (args.isEmpty()) println("For help use: kscript newmodule.kt --help")
 
-    val config = ScriptConfig(
+    val config = ScriptGradleModuleConfig(
         gradleConfig = GradleConfig(
             packagePrefix = "com.github.owner.projectname",
             templatesDirPath = "templates",
@@ -72,7 +72,7 @@ fun main(args: Array<String>) {
 
     // start build modules
     config.parseArgs(args).buildModules(
-        onReplaceMap = { module ->
+        onContentReplace = { module ->
             mapOf(
                 "packagename" to module.packageName,
                 "moduleName" to module.moduleNameParts.joinToString("") { it.capitalize() }.decapitalize(),
@@ -80,10 +80,13 @@ fun main(args: Array<String>) {
                 "module_name" to module.moduleNameParts.joinToString("_")
             )
         },
+        onDirReplace = { module ->
+            mapOf("packagename" to module.packageName.replace('.', '/'))
+        }
     )
 }
 
-fun ScriptConfig.parseArgs(args: Array<String>): ScriptConfig {
+fun ScriptGradleModuleConfig.parseArgs(args: Array<String>): ScriptGradleModuleConfig {
     val map: MutableMap<String, Any> = Docopt(usage).parse(args.toList())
     logV("Script args: $map")
 

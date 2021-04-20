@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Edit online your configuration!</title>
+</head>
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+<!-- CSS Reset -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+<!-- Milligram CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+
+<script src="https://unpkg.com/kotlin-playground@1"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  KotlinPlayground('.code-blocks-selector');
+});
+</script>
+
+<body>
+<div class="container">
+<p>Try it on Kotlin Playground <a href="https://pl.kotl.in/9oXsIoDNS">https://pl.kotl.in/9oXsIoDNS</a></p> or edit the sample below
+<h2>Build single module</h2>
+<p>Click "run" (on the right) to see the preview!</p>
+<code class="code-blocks-selector">
+fun main() {
+    val modules = config.modules.toProjectModuleList(config)
+    println(&quot;This script will create the following ${modules.size} module${if (modules.size == 1) &quot;&quot; else &quot;s&quot;}:&quot;)
+    modules.forEach {
+        println(
+            &quot;&quot;&quot;|
+               |Create module [${it.templateName}] ${it.moduleNameParts.joinToString(&quot; &quot;) { it.capitalize() }}
+               | - destinationDir: ${it.destinationDirPart}
+               | - packageName:    ${it.packageName}
+               | - gradlePath:     ${it.gradlePath}&quot;&quot;&quot;.trimMargin()
+        )
+    }
+    println(&quot;\nDo you want to continue?&quot;)
+
+}
+//sampleStart
+val config = ScriptGradleModuleConfig(
+    gradleConfig = GradleConfig(
+        packagePrefix = &quot;com.github.owner.projectname&quot;,
+        templatesDirPath = &quot;templates&quot;,
+        settingsGradleFilename = &quot;settings.gradle.kts&quot;,
+        dependenciesFilename = &quot;buildSrc/src/main/kotlin/Dependencies.kt&quot;,
+        dependenciesPrefix = &quot;module&quot;,
+    ),
+    modules = listOf(LibAndroid(&quot;my-lib&quot;)),
+    logLevel = 1,
+    hasPrompt = true,
+    writeOnDisk = true,
+    forceNamingConvention = false,
+)
+//sampleEnd
+
+//
+// ScriptGradleModuleConfig.kt
+//
+
+data class ScriptGradleModuleConfig(
+    val gradleConfig: GradleConfig = GradleConfig(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;),
+    val modules: List&lt;GradleComponent&gt; = emptyList(),
+    val logLevel: Int = -1,
+    val hasPrompt: Boolean = false,
+    val writeOnDisk: Boolean = false,
+    val forceNamingConvention: Boolean = false,
+)
+
+data class GradleConfig(
+    val packagePrefix: String,
+    val templatesDirPath: String,
+    val settingsGradleFilename: String,
+    val dependenciesFilename: String,
+    val dependenciesPrefix: String,
+)
+
+//
+// GradleComponent.kt
+//
+
+sealed class GradleComponent(
+    open val gradleName: String,
+    open val packageNamePart: String?,
+    open val extra: Map&lt;String, Any&gt; = emptyMap(),
+)
+
+// GradleComponents
+
+data class Group(
+    override val gradleName: String,
+    val modules: List&lt;GradleComponent&gt;,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+) : GradleComponent(gradleName, packageNamePart, extra)
+
+sealed class GradleModule(
+    gradleName: String,
+    packageNamePart: String?,
+    extra: Map&lt;String, Any&gt;,
+    open val templateName: String,
+) : GradleComponent(gradleName, packageNamePart, extra)
+
+// GradleModules
+
+class App(
+    override val gradleName: String,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+    override val templateName: String = &quot;app&quot;,
+) : GradleModule(gradleName, packageNamePart, extra, templateName)
+
+data class LibAndroid(
+    override val gradleName: String,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+    override val templateName: String = &quot;lib-android&quot;,
+) : GradleModule(gradleName, packageNamePart, extra, templateName)
+
+data class LibKotlin(
+    override val gradleName: String,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+    override val templateName: String = &quot;lib-kotlin&quot;,
+) : GradleModule(gradleName, packageNamePart, extra, templateName)
+
+// Utils
+
+fun String.toPackageName(): String =
+    toLowerCase().replace(&quot;-&quot;, &quot;&quot;)
+
+//
+// ProjectModule.kt
+//
+
+data class ProjectModule(
+    val configModule: GradleModule,
+    val configGroups: List&lt;Group&gt;,
+    val config: ScriptGradleModuleConfig,
+) {
+    val templateName: String = configModule.templateName
+
+    val moduleNameParts: List&lt;String&gt; =
+        configGroups.flatMap { it.gradleName.toModuleNameParts() } +
+            configModule.gradleName.toModuleNameParts()
+
+    val gradlePathParts: List&lt;String&gt; =
+        (configGroups.map { it.gradleName } + configModule.gradleName)
+            .runningReduce { acc, s -&gt;
+                if (!config.forceNamingConvention || s.startsWith(&quot;$acc-&quot;)) s else &quot;$acc-$s&quot;
+            }
+
+    /**
+     * Full gradle path, e.g., :feature:navigation:core
+     */
+    val gradlePath: String = gradlePathParts.joinToString(&quot;:&quot;, prefix = &quot;:&quot;)
+
+    /**
+     * Full package name, e.g., com.github.owner.projectname.myfeature
+     */
+    val packageName: String = buildString {
+        val prefix = listOf(config.gradleConfig.packagePrefix)
+        val parts = (configGroups.map { it.packageNamePart } + configModule.packageNamePart).filterNotNull()
+            .filter { it.isNotBlank() }
+        append((prefix + parts).joinToString(&quot;.&quot;))
+    }
+
+    val destinationDirPart: String = gradlePathParts.joinToString(&quot;/&quot;)
+
+    private fun String.toModuleNameParts(): List&lt;String&gt; = toLowerCase().split(&quot;[^a-z0-9]&quot;.toRegex())
+}
+
+fun List&lt;GradleComponent&gt;.toProjectModuleList(config: ScriptGradleModuleConfig): List&lt;ProjectModule&gt; =
+    flatMap { it.toProjectModuleList(config) }
+
+fun GradleComponent.toProjectModuleList(config: ScriptGradleModuleConfig): List&lt;ProjectModule&gt; =
+    when (this) {
+        is Group -&gt; modules.flatMap {
+            it.toProjectModuleList(config)
+                .map { (module, packages) -&gt;
+                    ProjectModule(module, listOf(this) + packages, config)
+                }
+        }
+        is GradleModule -&gt; listOf(ProjectModule(this, emptyList(), config))
+    }
+</code>
+
+<h2>Build multiple modules</h2>
+<p>Click "run" (on the right) to see the preview!</p>
+
+<code class="code-blocks-selector">
+fun main() {
+    val modules = config.modules.toProjectModuleList(config)
+    println(&quot;This script will create the following ${modules.size} module${if (modules.size == 1) &quot;&quot; else &quot;s&quot;}:&quot;)
+    modules.forEach {
+        println(
+            &quot;&quot;&quot;|
+               |Create module [${it.templateName}] ${it.moduleNameParts.joinToString(&quot; &quot;) { it.capitalize() }}
+               | - destinationDir: ${it.destinationDirPart}
+               | - packageName:    ${it.packageName}
+               | - gradlePath:     ${it.gradlePath}&quot;&quot;&quot;.trimMargin()
+        )
+    }
+    println(&quot;\nDo you want to continue?&quot;)
+
+}
+//sampleStart
+val config = ScriptGradleModuleConfig(
+    gradleConfig = GradleConfig(
+        packagePrefix = &quot;com.github.owner.projectname&quot;,
+        templatesDirPath = &quot;templates&quot;,
+        settingsGradleFilename = &quot;settings.gradle.kts&quot;,
+        dependenciesFilename = &quot;buildSrc/src/main/kotlin/Dependencies.kt&quot;,
+        dependenciesPrefix = &quot;module&quot;,
+    ),
+    modules = listOf(
+        Group(
+            gradleName = &quot;feature-name&quot;,
+            modules = listOf(
+                App(
+                    gradleName = &quot;app&quot;,
+                ),
+                LibAndroid(
+                    gradleName = &quot;ui&quot;,
+                ),
+                LibKotlin(
+                    gradleName = &quot;core&quot;,
+                )
+            )
+        ),
+        LibAndroid(
+            gradleName = &quot;my-lib&quot;,
+        )
+    ),
+    logLevel = 1,
+    hasPrompt = true,
+    writeOnDisk = true,
+    forceNamingConvention = false,
+)
+//sampleEnd
+
+//
+// ScriptGradleModuleConfig.kt
+//
+
+data class ScriptGradleModuleConfig(
+    val gradleConfig: GradleConfig = GradleConfig(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;),
+    val modules: List&lt;GradleComponent&gt; = emptyList(),
+    val logLevel: Int = -1,
+    val hasPrompt: Boolean = false,
+    val writeOnDisk: Boolean = false,
+    val forceNamingConvention: Boolean = false,
+)
+
+data class GradleConfig(
+    val packagePrefix: String,
+    val templatesDirPath: String,
+    val settingsGradleFilename: String,
+    val dependenciesFilename: String,
+    val dependenciesPrefix: String,
+)
+
+//
+// GradleComponent.kt
+//
+
+sealed class GradleComponent(
+    open val gradleName: String,
+    open val packageNamePart: String?,
+    open val extra: Map&lt;String, Any&gt; = emptyMap(),
+)
+
+// GradleComponents
+
+data class Group(
+    override val gradleName: String,
+    val modules: List&lt;GradleComponent&gt;,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+) : GradleComponent(gradleName, packageNamePart, extra)
+
+sealed class GradleModule(
+    gradleName: String,
+    packageNamePart: String?,
+    extra: Map&lt;String, Any&gt;,
+    open val templateName: String,
+) : GradleComponent(gradleName, packageNamePart, extra)
+
+// GradleModules
+
+class App(
+    override val gradleName: String,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+    override val templateName: String = &quot;app&quot;,
+) : GradleModule(gradleName, packageNamePart, extra, templateName)
+
+data class LibAndroid(
+    override val gradleName: String,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+    override val templateName: String = &quot;lib-android&quot;,
+) : GradleModule(gradleName, packageNamePart, extra, templateName)
+
+data class LibKotlin(
+    override val gradleName: String,
+    override val packageNamePart: String? = gradleName.toPackageName(),
+    override val extra: Map&lt;String, Any&gt; = emptyMap(),
+    override val templateName: String = &quot;lib-kotlin&quot;,
+) : GradleModule(gradleName, packageNamePart, extra, templateName)
+
+// Utils
+
+fun String.toPackageName(): String =
+    toLowerCase().replace(&quot;-&quot;, &quot;&quot;)
+
+//
+// ProjectModule.kt
+//
+
+data class ProjectModule(
+    val configModule: GradleModule,
+    val configGroups: List&lt;Group&gt;,
+    val config: ScriptGradleModuleConfig,
+) {
+    val templateName: String = configModule.templateName
+
+    val moduleNameParts: List&lt;String&gt; =
+        configGroups.flatMap { it.gradleName.toModuleNameParts() } +
+            configModule.gradleName.toModuleNameParts()
+
+    val gradlePathParts: List&lt;String&gt; =
+        (configGroups.map { it.gradleName } + configModule.gradleName)
+            .runningReduce { acc, s -&gt;
+                if (!config.forceNamingConvention || s.startsWith(&quot;$acc-&quot;)) s else &quot;$acc-$s&quot;
+            }
+
+    /**
+     * Full gradle path, e.g., :feature:navigation:core
+     */
+    val gradlePath: String = gradlePathParts.joinToString(&quot;:&quot;, prefix = &quot;:&quot;)
+
+    /**
+     * Full package name, e.g., com.github.owner.projectname.myfeature
+     */
+    val packageName: String = buildString {
+        val prefix = listOf(config.gradleConfig.packagePrefix)
+        val parts = (configGroups.map { it.packageNamePart } + configModule.packageNamePart).filterNotNull()
+            .filter { it.isNotBlank() }
+        append((prefix + parts).joinToString(&quot;.&quot;))
+    }
+
+    val destinationDirPart: String = gradlePathParts.joinToString(&quot;/&quot;)
+
+    private fun String.toModuleNameParts(): List&lt;String&gt; = toLowerCase().split(&quot;[^a-z0-9]&quot;.toRegex())
+}
+
+fun List&lt;GradleComponent&gt;.toProjectModuleList(config: ScriptGradleModuleConfig): List&lt;ProjectModule&gt; =
+    flatMap { it.toProjectModuleList(config) }
+
+fun GradleComponent.toProjectModuleList(config: ScriptGradleModuleConfig): List&lt;ProjectModule&gt; =
+    when (this) {
+        is Group -&gt; modules.flatMap {
+            it.toProjectModuleList(config)
+                .map { (module, packages) -&gt;
+                    ProjectModule(module, listOf(this) + packages, config)
+                }
+        }
+        is GradleModule -&gt; listOf(ProjectModule(this, emptyList(), config))
+    }
+</code>
+</div>
+</body>
+</html>

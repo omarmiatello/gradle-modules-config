@@ -1,11 +1,11 @@
 package com.github.omarmiatello.gradlemoduleconfig.script
 
-import com.github.omarmiatello.gradlemoduleconfig.dataclass.ScriptConfig
+import com.github.omarmiatello.gradlemoduleconfig.dataclass.ScriptGradleModuleConfig
 import java.io.File
 
 public class ProjectFiles(
     public val mainDir: File,
-    config: ScriptConfig,
+    config: ScriptGradleModuleConfig,
 ) {
     public val templatesDir: File = mainDir.resolve(config.gradleConfig.templatesDirPath)
 
@@ -17,7 +17,7 @@ public class ProjectFiles(
         .also { if (!it.exists() || !it.isDirectory) error("'$templateName' template does not exist!") }
 
     public companion object {
-        public fun find(config: ScriptConfig): ProjectFiles {
+        public fun find(config: ScriptGradleModuleConfig): ProjectFiles {
             val templatesDirPath = config.gradleConfig.templatesDirPath
             var currentDir: File? = File("").absoluteFile
             while (currentDir != null) {

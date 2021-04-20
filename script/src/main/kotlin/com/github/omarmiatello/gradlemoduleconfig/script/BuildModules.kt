@@ -2,13 +2,14 @@ package com.github.omarmiatello.gradlemoduleconfig.script
 
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.App
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.ProjectModule
-import com.github.omarmiatello.gradlemoduleconfig.dataclass.ScriptConfig
+import com.github.omarmiatello.gradlemoduleconfig.dataclass.ScriptGradleModuleConfig
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.toProjectModuleList
 import java.io.File
 
-public fun ScriptConfig.buildModules(
-    onReplaceMap: (ProjectModule) -> Map<String, String>,
-    onCreateModuleDestination: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
+public fun ScriptGradleModuleConfig.buildModules(
+    onContentReplace: (ProjectModule) -> Map<String, String>,
+    onDirReplace: (ProjectModule) -> Map<String, String>,
+    onModuleDestination: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
         val templateName = module.templateName
         val templateDir = projectFiles.getTemplateDir(templateName)
         val destinationDir = File("${projectFiles.mainDir.absolutePath}/${module.destinationDirPart}")
@@ -23,19 +24,41 @@ public fun ScriptConfig.buildModules(
                | - gradlePath:     ${module.gradlePath}""".trimMargin()
         )
 
-        module.createModuleDestination(
-            sourceDir = templateDir,
-            destinationDir = destinationDir,
-            replaceMap = onReplaceMap(module)
+        copyFromTemplate(
+            source = templateDir,
+            destination = destinationDir,
+            contentReplace = onContentReplace(module),
+            dirReplace = onDirReplace(module),
+            config = this,
         )
     },
-    onGradleSettings: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
-        module.addGradleSettingsInclude(settingsGradleFile = projectFiles.settingsGradleFile)
-    },
-    onModuleInDependency: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
+    onGradleDependencies: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
         if (module.configModule !is App) {
-            module.addModuleInDependency(dependenciesFile = projectFiles.dependenciesFile)
+            appendSorted(
+                destinationFile = projectFiles.dependenciesFile,
+                newString = "import org.gradle.api.artifacts.dsl.DependencyHandler",
+                appendAfter = "import ",
+                appendFallback = { 0 },
+                config = module.config,
+            )
+            val prefix = module.config.gradleConfig.dependenciesPrefix
+            val moduleName = module.moduleNameParts.joinToString("") { it.capitalize() }
+            appendSorted(
+                destinationFile = projectFiles.dependenciesFile,
+                newString = "val DependencyHandler.$prefix$moduleName get() = project(\"${module.gradlePath}\")",
+                appendAfter = "val DependencyHandler.$prefix",
+                appendFallback = { it.lastIndex + 1 },
+                config = module.config,
+            )
         }
+    },
+    onGradleSettings: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
+        appendSorted(
+            destinationFile = projectFiles.settingsGradleFile,
+            newString = "include(\"${module.gradlePath}\")",
+            appendAfter = "include(\"",
+            config = this,
+        )
     },
 ) {
     val projectFiles: ProjectFiles = ProjectFiles.find(this)
@@ -49,14 +72,11 @@ public fun ScriptConfig.buildModules(
         logD(importantMessage("*** writeOnDisk is false, this IS A PREVIEW of the changes ***"))
     }
 
-    modules.toProjectModuleList(this)
-        .forEach { module ->
-            onCreateModuleDestination(module, projectFiles)
-
-            onGradleSettings(module, projectFiles)
-
-            onModuleInDependency(module, projectFiles)
-        }
+    modules.toProjectModuleList(this).forEach { module ->
+        onModuleDestination(module, projectFiles)
+        onGradleDependencies(module, projectFiles)
+        onGradleSettings(module, projectFiles)
+    }
 
     if (!writeOnDisk) {
         logI(importantMessage("*** writeOnDisk is false, this WAS A PREVIEW of the changes ***"))
@@ -64,7 +84,7 @@ public fun ScriptConfig.buildModules(
 }
 
 @Suppress("MagicNumber")
-public fun ScriptConfig.promptPreviewWithConfirmation(): Boolean =
+public fun ScriptGradleModuleConfig.promptPreviewWithConfirmation(): Boolean =
     askUserBoolean(
         buildString {
             val modules = modules.toProjectModuleList(this@promptPreviewWithConfirmation)
@@ -79,22 +99,25 @@ public fun ScriptConfig.promptPreviewWithConfirmation(): Boolean =
     )
 
 @Suppress("NestedBlockDepth")
-public fun ProjectModule.createModuleDestination(
-    sourceDir: File,
-    destinationDir: File,
-    replaceMap: Map<String, String>,
+public fun copyFromTemplate(
+    source: File,
+    destination: File,
+    contentReplace: Map<String, String>,
+    dirReplace: Map<String, String>,
+    config: ScriptGradleModuleConfig,
 ) {
-    fun String.replaceKeywords(onReplaceValue: (String) -> String = { it }) =
-        replaceMap.toList().fold(this) { str, (key, value) -> str.replace(key, onReplaceValue(value)) }
+    fun Map<String, String>.replaceOn(source: String) = toList().fold(source) { str, (key, value) ->
+        str.replace(key, value)
+    }
 
     val writeOnDisk = config.writeOnDisk
-    val keywordsLowerCase = replaceMap.keys.map { it.toLowerCase() }.distinct()
+    val keywordsLowerCase = contentReplace.keys.map { it.toLowerCase() }.distinct()
 
-    sourceDir.walkTopDown()
-        .onEnter { it.name != "build" }
+    source.walkTopDown()
+        .onEnter { it.name != "build" } // avoid build folders
         .forEach { fileOrigin: File ->
-            val fileDestination = destinationDir.resolve(
-                fileOrigin.relativeTo(sourceDir).path.replaceKeywords { it.replace('.', '/') }
+            val fileDestination = destination.resolve(
+                dirReplace.replaceOn(fileOrigin.relativeTo(source).path)
             )
             if (fileOrigin.isDirectory) {
                 if (!fileDestination.exists()) {
@@ -107,7 +130,7 @@ public fun ProjectModule.createModuleDestination(
                 val text = fileOrigin.readText()
                 if (text.findAnyOf(keywordsLowerCase, ignoreCase = true) != null) {
                     config.logV("Create file: $fileDestination")
-                    if (writeOnDisk) fileDestination.writeText(text.replaceKeywords())
+                    if (writeOnDisk) fileDestination.writeText(contentReplace.replaceOn(text))
                 } else {
                     config.logV("Copy file: $fileDestination")
                     if (writeOnDisk) fileOrigin.copyTo(fileDestination, overwrite = true)
@@ -116,41 +139,21 @@ public fun ProjectModule.createModuleDestination(
         }
 }
 
-public fun ProjectModule.addGradleSettingsInclude(settingsGradleFile: File) {
-    val includeText = "include(\"$gradlePath\")"
-    val lines = settingsGradleFile.readLines()
-    if (lines.firstOrNull { includeText in it } == null) {
+public fun appendSorted(
+    destinationFile: File,
+    newString: String,
+    appendAfter: String,
+    appendFallback: (List<String>) -> Int = { it.lastIndex + 1 },
+    config: ScriptGradleModuleConfig,
+) {
+    val lines = destinationFile.readLines()
+    if (lines.firstOrNull { newString in it } == null) { // no duplicates
         val fileText = lines.toMutableList().apply {
-            val insertIndex = lines.indexOfLast { it.startsWith("include") && it < includeText }
-            add(insertIndex + 1, includeText)
-            config.logV("Update ${settingsGradleFile.toPath().fileName}, added: $includeText")
+            val insertIndex = (lines.indexOfLast { it.startsWith(appendAfter) && it < newString } + 1)
+                .takeIf { it != 0 } ?: appendFallback(lines)
+            add(insertIndex, newString)
+            config.logV("Update ${destinationFile.toPath().fileName}, added: $newString")
         }.joinToString("\n")
-        if (config.writeOnDisk) settingsGradleFile.writeText(fileText)
-    }
-}
-
-public fun ProjectModule.addModuleInDependency(dependenciesFile: File) {
-    val dependenciesPrefix = config.gradleConfig.dependenciesPrefix
-    val moduleName = moduleNameParts.joinToString("") { it.capitalize() }
-    val lines = dependenciesFile.readLines()
-    val import = "import org.gradle.api.artifacts.dsl.DependencyHandler"
-    val shouldAddImport = lines.firstOrNull { import in it } == null
-
-    val dependency = "val DependencyHandler.$dependenciesPrefix$moduleName get() = project(\"$gradlePath\")"
-
-    if (lines.firstOrNull { dependency in it } == null) {
-        val fileText = lines.toMutableList().also { newLines ->
-            if (shouldAddImport) newLines.add(0, import)
-
-            val isDependencyLine: (String) -> Boolean = { "val DependencyHandler.$dependenciesPrefix" in it }
-            val insertIndex = lines
-                .indexOfLast { isDependencyLine(it) && it.substringAfter(":") < gradlePath.substring(1) }
-                .takeIf { it != -1 }
-                ?: (lines.indexOfFirst(isDependencyLine) - 1).takeIf { it >= 0 }
-                ?: lines.lastIndex
-            newLines.add(insertIndex + 1, dependency)
-            config.logV("Update ${dependenciesFile.toPath().fileName}, added: $dependency")
-        }.joinToString("\n")
-        if (config.writeOnDisk) dependenciesFile.writeText(fileText)
+        if (config.writeOnDisk) destinationFile.writeText(fileText)
     }
 }
