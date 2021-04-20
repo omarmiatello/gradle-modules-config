@@ -118,7 +118,7 @@ fun main(args: Array<String>) {
     )
 }
 
-fun ScriptGradleModuleConfig.parseArgs(args: Array<String>): ScriptConfig {
+fun ScriptGradleModuleConfig.parseArgs(args: Array<String>): ScriptGradleModuleConfig {
     val map: MutableMap<String, Any> = Docopt(usage).parse(args.toList())
     logV("Script args: $map")
 
