@@ -1,4 +1,5 @@
 version = "1.0.1"
+description = "Dataclasses used to define the configuration for this script"
 
 plugins {
     id("java-library")

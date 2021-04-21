@@ -29,7 +29,6 @@ public fun ScriptGradleModuleConfig.buildModules(
             destination = destinationDir,
             contentReplace = onContentReplace(module),
             dirReplace = onDirReplace(module),
-            config = this,
         )
     },
     onGradleDependencies: (ProjectModule, ProjectFiles) -> Unit = { module, projectFiles ->
@@ -39,7 +38,6 @@ public fun ScriptGradleModuleConfig.buildModules(
                 newString = "import org.gradle.api.artifacts.dsl.DependencyHandler",
                 appendAfter = "import ",
                 appendFallback = { 0 },
-                config = module.config,
             )
             val prefix = module.config.gradleConfig.dependenciesPrefix
             val moduleName = module.moduleNameParts.joinToString("") { it.capitalize() }
@@ -47,8 +45,7 @@ public fun ScriptGradleModuleConfig.buildModules(
                 destinationFile = projectFiles.dependenciesFile,
                 newString = "val DependencyHandler.$prefix$moduleName get() = project(\"${module.gradlePath}\")",
                 appendAfter = "val DependencyHandler.$prefix",
-                appendFallback = { it.lastIndex + 1 },
-                config = module.config,
+                appendFallback = { it.lastIndex },
             )
         }
     },
@@ -57,7 +54,7 @@ public fun ScriptGradleModuleConfig.buildModules(
             destinationFile = projectFiles.settingsGradleFile,
             newString = "include(\"${module.gradlePath}\")",
             appendAfter = "include(\"",
-            config = this,
+            appendFallback = { it.lastIndex },
         )
     },
 ) {
@@ -98,19 +95,26 @@ public fun ScriptGradleModuleConfig.promptPreviewWithConfirmation(): Boolean =
         }
     )
 
-@Suppress("NestedBlockDepth")
+public fun ScriptGradleModuleConfig.copyFromTemplate(
+    source: File,
+    destination: File,
+    contentReplace: Map<String, String>,
+    dirReplace: Map<String, String>,
+): Unit = copyFromTemplate(source, destination, contentReplace, dirReplace, { logV(it) }, writeOnDisk)
+
+@Suppress("NestedBlockDepth", "LongParameterList")
 public fun copyFromTemplate(
     source: File,
     destination: File,
     contentReplace: Map<String, String>,
     dirReplace: Map<String, String>,
-    config: ScriptGradleModuleConfig,
+    log: (String) -> Unit = { println(it) },
+    writeOnDisk: Boolean = true,
 ) {
     fun Map<String, String>.replaceOn(source: String) = toList().fold(source) { str, (key, value) ->
         str.replace(key, value)
     }
 
-    val writeOnDisk = config.writeOnDisk
     val keywordsLowerCase = contentReplace.keys.map { it.toLowerCase() }.distinct()
 
     source.walkTopDown()
@@ -121,7 +125,7 @@ public fun copyFromTemplate(
             )
             if (fileOrigin.isDirectory) {
                 if (!fileDestination.exists()) {
-                    config.logV("Create dir: $fileDestination")
+                    log("Create dir: $fileDestination")
                     if (writeOnDisk) {
                         fileDestination.mkdirs()
                     }
@@ -129,31 +133,41 @@ public fun copyFromTemplate(
             } else {
                 val text = fileOrigin.readText()
                 if (text.findAnyOf(keywordsLowerCase, ignoreCase = true) != null) {
-                    config.logV("Create file: $fileDestination")
+                    log("Create file: $fileDestination")
                     if (writeOnDisk) fileDestination.writeText(contentReplace.replaceOn(text))
                 } else {
-                    config.logV("Copy file: $fileDestination")
+                    log("Copy file: $fileDestination")
                     if (writeOnDisk) fileOrigin.copyTo(fileDestination, overwrite = true)
                 }
             }
         }
 }
 
+public fun ScriptGradleModuleConfig.appendSorted(
+    destinationFile: File,
+    newString: String,
+    appendAfter: String,
+    appendFallback: (List<String>) -> Int,
+): Unit = appendSorted(destinationFile, newString, appendAfter, appendFallback, { logV(it) }, writeOnDisk)
+
+@Suppress("LongParameterList")
 public fun appendSorted(
     destinationFile: File,
     newString: String,
     appendAfter: String,
-    appendFallback: (List<String>) -> Int = { it.lastIndex + 1 },
-    config: ScriptGradleModuleConfig,
+    appendFallback: (List<String>) -> Int,
+    log: (String) -> Unit = { println(it) },
+    writeOnDisk: Boolean = true,
 ) {
     val lines = destinationFile.readLines()
     if (lines.firstOrNull { newString in it } == null) { // no duplicates
         val fileText = lines.toMutableList().apply {
-            val insertIndex = (lines.indexOfLast { it.startsWith(appendAfter) && it < newString } + 1)
-                .takeIf { it != 0 } ?: appendFallback(lines)
-            add(insertIndex, newString)
-            config.logV("Update ${destinationFile.toPath().fileName}, added: $newString")
+            val index = (lines.indexOfLast { it.startsWith(appendAfter) && it < newString } + 1).takeIf { it != 0 }
+                ?: lines.indexOfFirst { it.startsWith(appendAfter) }.takeIf { it != -1 }
+                ?: appendFallback(lines)
+            add(index, newString)
+            log("Update ${destinationFile.toPath().fileName}, added: $newString")
         }.joinToString("\n")
-        if (config.writeOnDisk) destinationFile.writeText(fileText)
+        if (writeOnDisk) destinationFile.writeText(fileText)
     }
 }

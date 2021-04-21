@@ -54,7 +54,6 @@ tasks.dokkaJavadoc.configure {
     }
 }
 
-
 afterEvaluate {
     publishing {
         repositories {
@@ -90,8 +89,8 @@ afterEvaluate {
                     if (!"USE_SNAPSHOT".byProperty.isNullOrBlank()) {
                         version = "$version-SNAPSHOT"
                     }
-                    name.set("gradle-modules-config")
-                    description.set("Define a configuration and this script will take care of creating the gradle modules")
+                    name.set("gradle-modules-config:$artifactId")
+                    description.set(project.description)
                     url.set("https://github.com/omarmiatello/gradle-modules-config/")
 
                     licenses {
@@ -102,7 +101,7 @@ afterEvaluate {
                     }
                     developers {
                         developer {
-                            id.set("jackl85")
+                            id.set("omar.miatello")
                             name.set("Omar Miatello")
                             email.set("omar.miatello@gmail.com")
                         }

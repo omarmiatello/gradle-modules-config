@@ -1,4 +1,5 @@
 version = "1.0.1"
+description = "This script will take care of creating the gradle modules"
 
 plugins {
     id("java-library")

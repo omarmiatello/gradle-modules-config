@@ -23,7 +23,7 @@ implementation("com.github.omarmiatello.gradle-modules-config:script:1.0.1")
 
 Try it on Kotlin Playground https://pl.kotl.in/9oXsIoDNS or [our samples here](https://omarmiatello.github.io/gradle-modules-config/config_online.html)
 
-<iframe src="https://pl.kotl.in/bEJDWFCw6?from=17&to=48"></iframe>
+<iframe src="https://pl.kotl.in/bEJDWFCw6?from=17&to=48&"></iframe>
 
 #### kscript example
 
