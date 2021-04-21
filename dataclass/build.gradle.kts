@@ -1,4 +1,4 @@
-version = "1.0.1"
+version = "1.0.2"
 description = "Dataclasses used to define the configuration for this script"
 
 plugins {

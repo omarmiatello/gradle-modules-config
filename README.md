@@ -14,7 +14,7 @@ Note: Could be used with Ktor
 
 Add this in your `build.gradle.ktx` file:
 ```kotlin
-implementation("com.github.omarmiatello.gradle-modules-config:script:1.0.1")
+implementation("com.github.omarmiatello.gradle-modules-config:script:1.0.2")
 ```
 
 ## How to use
@@ -29,7 +29,7 @@ Try it on Kotlin Playground https://pl.kotl.in/9oXsIoDNS or [our samples here](h
 
 ```kotlin
 #!/usr/bin/env kscript
-@file:DependsOn("com.github.omarmiatello.gradle-modules-config:script:1.0.1")
+@file:DependsOn("com.github.omarmiatello.gradle-modules-config:script:1.0.2")
 @file:DependsOn("com.offbytwo:docopt:0.6.0.20150202")
 
 /**
