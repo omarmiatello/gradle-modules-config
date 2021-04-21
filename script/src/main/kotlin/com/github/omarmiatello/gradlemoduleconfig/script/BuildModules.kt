@@ -110,6 +110,7 @@ public fun copyFromTemplate(
     dirReplace: Map<String, String>,
     log: (String) -> Unit = { println(it) },
     writeOnDisk: Boolean = true,
+    onEnter: (File) -> Boolean = { it.name != "build" }, // avoid build folders
 ) {
     fun Map<String, String>.replaceOn(source: String) = toList().fold(source) { str, (key, value) ->
         str.replace(key, value)
@@ -118,7 +119,7 @@ public fun copyFromTemplate(
     val keywordsLowerCase = contentReplace.keys.map { it.toLowerCase() }.distinct()
 
     source.walkTopDown()
-        .onEnter { it.name != "build" } // avoid build folders
+        .onEnter(onEnter)
         .forEach { fileOrigin: File ->
             val fileDestination = destination.resolve(
                 dirReplace.replaceOn(fileOrigin.relativeTo(source).path)
