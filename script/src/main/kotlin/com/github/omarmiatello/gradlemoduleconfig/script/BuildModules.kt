@@ -39,6 +39,12 @@ public fun ScriptGradleModuleConfig.buildModules(
                 appendAfter = "import ",
                 appendFallback = { 0 },
             )
+            appendSorted(
+                destinationFile = projectFiles.dependenciesFile,
+                newString = "import org.gradle.kotlin.dsl.project",
+                appendAfter = "import ",
+                appendFallback = { 0 },
+            )
             val prefix = module.config.gradleConfig.dependenciesPrefix
             val moduleName = module.moduleNameParts.joinToString("") { it.capitalize() }
             appendSorted(
