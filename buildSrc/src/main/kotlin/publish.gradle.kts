@@ -101,7 +101,7 @@ afterEvaluate {
                     }
                     developers {
                         developer {
-                            id.set("omar.miatello")
+                            id.set("omarmiatello")
                             name.set("Omar Miatello")
                             email.set("omar.miatello@gmail.com")
                         }
