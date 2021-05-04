@@ -1,0 +1,230 @@
+{
+    "current": {
+        "dependencies": [
+            {
+                "group": "androidx.appcompat",
+                "userReason": null,
+                "version": "1.2.0",
+                "projectUrl": "https://developer.android.com/jetpack/androidx",
+                "name": "appcompat"
+            },
+            {
+                "group": "androidx.core",
+                "userReason": null,
+                "version": "1.3.2",
+                "projectUrl": "https://developer.android.com/jetpack/androidx",
+                "name": "core-ktx"
+            },
+            {
+                "group": "androidx.test",
+                "userReason": null,
+                "version": "1.3.0",
+                "projectUrl": "https://developer.android.com/testing",
+                "name": "rules"
+            },
+            {
+                "group": "androidx.test.espresso",
+                "userReason": null,
+                "version": "3.3.0",
+                "projectUrl": "https://developer.android.com/testing",
+                "name": "espresso-core"
+            },
+            {
+                "group": "androidx.test.ext",
+                "userReason": null,
+                "version": "1.1.2",
+                "projectUrl": "https://developer.android.com/testing",
+                "name": "junit"
+            },
+            {
+                "group": "com.github.ben-manes.versions",
+                "userReason": null,
+                "version": "0.38.0",
+                "projectUrl": null,
+                "name": "com.github.ben-manes.versions.gradle.plugin"
+            },
+            {
+                "group": "io.gitlab.arturbosch.detekt",
+                "userReason": null,
+                "version": "1.16.0",
+                "projectUrl": null,
+                "name": "io.gitlab.arturbosch.detekt.gradle.plugin"
+            },
+            {
+                "group": "junit",
+                "userReason": null,
+                "version": "4.13.2",
+                "projectUrl": "http://junit.org",
+                "name": "junit"
+            },
+            {
+                "group": "org.jlleitschuh.gradle.ktlint",
+                "userReason": null,
+                "version": "10.0.0",
+                "projectUrl": null,
+                "name": "org.jlleitschuh.gradle.ktlint.gradle.plugin"
+            }
+        ],
+        "count": 9
+    },
+    "gradle": {
+        "current": {
+            "version": "7.0",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "nightly": {
+            "version": "",
+            "reason": "update check disabled",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "enabled": true,
+        "releaseCandidate": {
+            "version": "6.9-rc-1",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "running": {
+            "version": "7.0",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        }
+    },
+    "exceeded": {
+        "dependencies": [
+            
+        ],
+        "count": 0
+    },
+    "outdated": {
+        "dependencies": [
+            {
+                "group": "com.google.accompanist",
+                "available": {
+                    "release": null,
+                    "milestone": "0.8.1",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "0.7.0",
+                "projectUrl": "https://github.com/google/accompanist/",
+                "name": "accompanist-coil"
+            },
+            {
+                "group": "org.jetbrains.kotlin",
+                "available": {
+                    "release": null,
+                    "milestone": "1.5.0",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.4.32",
+                "projectUrl": "https://kotlinlang.org/",
+                "name": "kotlin-reflect"
+            },
+            {
+                "group": "org.jetbrains.kotlin",
+                "available": {
+                    "release": null,
+                    "milestone": "1.5.0",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.4.32",
+                "projectUrl": "https://kotlinlang.org/",
+                "name": "kotlin-scripting-compiler-embeddable"
+            }
+        ],
+        "count": 3
+    },
+    "unresolved": {
+        "dependencies": [
+            {
+                "group": "androidx.activity",
+                "userReason": null,
+                "version": "1.3.0-alpha06",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.activity:activity-compose:+.\nVersions rejected by component selection rules:\n  - 1.3.0-alpha07\n  - 1.3.0-alpha06\n  - 1.3.0-alpha05\n  - 1.3.0-alpha04\n  - 1.3.0-alpha03\n  - + 2 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/activity/activity-compose/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/activity/activity-compose/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "activity-compose"
+            },
+            {
+                "group": "androidx.compose.compiler",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.compiler:compiler:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 9 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/compiler/compiler/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/compiler/compiler/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/compiler/compiler/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "compiler"
+            },
+            {
+                "group": "androidx.compose.foundation",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.foundation:foundation:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 15 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/foundation/foundation/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/foundation/foundation/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "foundation"
+            },
+            {
+                "group": "androidx.compose.material",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.material:material:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 15 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/material/material/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/material/material/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/material/material/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "material"
+            },
+            {
+                "group": "androidx.compose.material",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.material:material-icons-core:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 15 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/material/material-icons-core/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/material/material-icons-core/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/material/material-icons-core/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "material-icons-core"
+            },
+            {
+                "group": "androidx.compose.material",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.material:material-icons-extended:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 15 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/material/material-icons-extended/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/material/material-icons-extended/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/material/material-icons-extended/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "material-icons-extended"
+            },
+            {
+                "group": "androidx.compose.ui",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.ui:ui:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 15 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/ui/ui/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/ui/ui/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "ui"
+            },
+            {
+                "group": "androidx.compose.ui",
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.compose.ui:ui-tooling:+.\nVersions rejected by component selection rules:\n  - 1.0.0-beta05\n  - 1.0.0-beta04\n  - 1.0.0-beta03\n  - 1.0.0-beta02\n  - 1.0.0-beta01\n  - + 5 more\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/compose/ui/ui-tooling/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/compose/ui/ui-tooling/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "ui-tooling"
+            },
+            {
+                "group": "androidx.lifecycle",
+                "userReason": null,
+                "version": "1.0.0-alpha04",
+                "reason": "org.gradle.internal.resolve.ModuleVersionNotFoundException: Could not find any version that matches androidx.lifecycle:lifecycle-viewmodel-compose:+.\nVersions rejected by component selection rules:\n  - 1.0.0-alpha04\n  - 1.0.0-alpha03\n  - 1.0.0-alpha02\n  - 1.0.0-alpha01\nSearched in the following locations:\n  - https://repo.maven.apache.org/maven2/androidx/lifecycle/lifecycle-viewmodel-compose/maven-metadata.xml\n  - https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-compose/maven-metadata.xml\n  - https://jcenter.bintray.com/androidx/lifecycle/lifecycle-viewmodel-compose/maven-metadata.xml\nRequired by:\n    project :app\n",
+                "projectUrl": null,
+                "name": "lifecycle-viewmodel-compose"
+            },
+            {
+                "group": "com.pinterest",
+                "userReason": null,
+                "version": "0.40.0",
+                "reason": "org.gradle.internal.resolve.ModuleVersionResolveException: Could not resolve com.pinterest:ktlint:+.\nRequired by:\n    project :\nCaused by: org.gradle.internal.component.AmbiguousConfigurationSelectionException: Cannot choose between the following variants of com.pinterest:ktlint:0.41.0:\n  - runtimeElements\n  - shadowRuntimeElements\nAll of them match the consumer attributes:\n  - Variant 'runtimeElements' capability com.pinterest:ktlint:0.41.0:\n      - Unmatched attributes:\n          - Provides org.gradle.category 'library' but the consumer didn't ask for it\n          - Provides org.gradle.dependency.bundling 'external' but the consumer didn't ask for it\n          - Provides org.gradle.jvm.version '8' but the consumer didn't ask for it\n          - Provides org.gradle.libraryelements 'jar' but the consumer didn't ask for it\n          - Provides org.gradle.status 'release' but the consumer didn't ask for it\n          - Provides org.gradle.usage 'java-runtime' but the consumer didn't ask for it\n          - Provides org.jetbrains.kotlin.localToProject 'public' but the consumer didn't ask for it\n          - Provides org.jetbrains.kotlin.platform.type 'jvm' but the consumer didn't ask for it\n  - Variant 'shadowRuntimeElements' capability com.pinterest:ktlint:0.41.0:\n      - Unmatched attributes:\n          - Provides org.gradle.category 'library' but the consumer didn't ask for it\n          - Provides org.gradle.dependency.bundling 'shadowed' but the consumer didn't ask for it\n          - Provides org.gradle.libraryelements 'jar' but the consumer didn't ask for it\n          - Provides org.gradle.status 'release' but the consumer didn't ask for it\n          - Provides org.gradle.usage 'java-runtime' but the consumer didn't ask for it\n\tat org.gradle.internal.component.model.AttributeConfigurationSelector.selectConfigurationUsingAttributeMatching(AttributeConfigurationSelector.java:105)\n\tat org.gradle.internal.component.model.AttributeConfigurationSelector.selectConfigurationUsingAttributeMatching(AttributeConfigurationSelector.java:108)\n\tat org.gradle.internal.component.model.AttributeConfigurationSelector.selectConfigurationUsingAttributeMatching(AttributeConfigurationSelector.java:51)\n\tat org.gradle.internal.component.model.LocalComponentDependencyMetadata.selectConfigurations(LocalComponentDependencyMetadata.java:144)\n\tat org.gradle.internal.component.local.model.DslOriginDependencyMetadataWrapper.selectConfigurations(DslOriginDependencyMetadataWrapper.java:71)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.graph.builder.EdgeState.calculateTargetConfigurations(EdgeState.java:265)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.graph.builder.EdgeState.attachToTargetConfigurations(EdgeState.java:150)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.graph.builder.DependencyGraphBuilder.attachToTargetRevisionsSerially(DependencyGraphBuilder.java:375)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.graph.builder.DependencyGraphBuilder.resolveEdges(DependencyGraphBuilder.java:260)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.graph.builder.DependencyGraphBuilder.traverseGraph(DependencyGraphBuilder.java:197)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.graph.builder.DependencyGraphBuilder.resolve(DependencyGraphBuilder.java:148)\n\tat org.gradle.api.internal.artifacts.ivyservice.resolveengine.DefaultArtifactDependencyResolver.resolve(DefaultArtifactDependencyResolver.java:145)\n\tat org.gradle.api.internal.artifacts.ivyservice.DefaultConfigurationResolver.resolveGraph(DefaultConfigurationResolver.java:180)\n\tat org.gradle.api.internal.artifacts.ivyservice.ShortCircuitEmptyConfigurationResolver.resolveGraph(ShortCircuitEmptyConfigurationResolver.java:85)\n\tat org.gradle.api.internal.artifacts.ivyservice.ErrorHandlingConfigurationResolver.resolveGraph(ErrorHandlingConfigurationResolver.java:74)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$1.call(DefaultConfiguration.java:645)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration$1.call(DefaultConfiguration.java:636)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:75)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:153)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:62)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.lambda$call$2(DefaultBuildOperationExecutor.java:76)\n\tat org.gradle.internal.operations.UnmanagedBuildOperationWrapper.callWithUnmanagedSupport(UnmanagedBuildOperationWrapper.java:54)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:76)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveGraphIfRequired(DefaultConfiguration.java:636)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.lambda$resolveExclusively$4(DefaultConfiguration.java:616)\n\tat org.gradle.api.internal.project.DefaultProjectStateRegistry$CalculatedModelValueImpl.update(DefaultProjectStateRegistry.java:362)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveExclusively(DefaultConfiguration.java:613)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.resolveToStateOrLater(DefaultConfiguration.java:600)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration.getResolvedConfiguration(DefaultConfiguration.java:575)\n\tat org.gradle.api.internal.artifacts.configurations.DefaultConfiguration_Decorated.getResolvedConfiguration(Unknown Source)\n\tat com.github.benmanes.gradle.versions.updates.Resolver.resolve(Resolver.groovy:80)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates.resolve(DependencyUpdates.groovy:85)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates.access$0(DependencyUpdates.groovy)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates$_resolveProjects_closure6$_closure10.doCall(DependencyUpdates.groovy:75)\n\tat jdk.internal.reflect.GeneratedMethodAccessor1674.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)\n\tat groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)\n\tat org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)\n\tat groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)\n\tat groovy.lang.Closure.call(Closure.java:412)\n\tat groovy.lang.Closure.call(Closure.java:428)\n\tat org.codehaus.groovy.runtime.DefaultGroovyMethods.collect(DefaultGroovyMethods.java:3562)\n\tat org.codehaus.groovy.runtime.DefaultGroovyMethods.collect(DefaultGroovyMethods.java:3547)\n\tat org.codehaus.groovy.runtime.DefaultGroovyMethods.collect(DefaultGroovyMethods.java:3647)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates$_resolveProjects_closure6.doCall(DependencyUpdates.groovy:70)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates$_resolveProjects_closure6.call(DependencyUpdates.groovy)\n\tat org.codehaus.groovy.runtime.DefaultGroovyMethods.collect(DefaultGroovyMethods.java:3562)\n\tat org.codehaus.groovy.runtime.DefaultGroovyMethods.collect(DefaultGroovyMethods.java:3547)\n\tat org.codehaus.groovy.runtime.DefaultGroovyMethods.collect(DefaultGroovyMethods.java:3647)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates.resolveProjects(DependencyUpdates.groovy:67)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdates.run(DependencyUpdates.groovy:55)\n\tat com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask.dependencyUpdates(DependencyUpdatesTask.groovy:100)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:104)\n\tat org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)\n\tat org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)\n\tat org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$2.run(ExecuteActionsTaskExecuter.java:498)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:75)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:153)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:56)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.lambda$run$1(DefaultBuildOperationExecutor.java:71)\n\tat org.gradle.internal.operations.UnmanagedBuildOperationWrapper.runWithUnmanagedSupport(UnmanagedBuildOperationWrapper.java:45)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:71)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeAction(ExecuteActionsTaskExecuter.java:483)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeActions(ExecuteActionsTaskExecuter.java:466)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.access$300(ExecuteActionsTaskExecuter.java:105)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$TaskExecution.executeWithPreviousOutputFiles(ExecuteActionsTaskExecuter.java:270)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$TaskExecution.execute(ExecuteActionsTaskExecuter.java:248)\n\tat org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:83)\n\tat org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:37)\n\tat org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:50)\n\tat org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:47)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:75)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:153)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:62)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.lambda$call$2(DefaultBuildOperationExecutor.java:76)\n\tat org.gradle.internal.operations.UnmanagedBuildOperationWrapper.callWithUnmanagedSupport(UnmanagedBuildOperationWrapper.java:54)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:76)\n\tat org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:47)\n\tat org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:37)\n\tat org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:68)\n\tat org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:38)\n\tat org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:50)\n\tat org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:36)\n\tat org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:41)\n\tat org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:74)\n\tat org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)\n\tat org.gradle.internal.execution.steps.CreateOutputsStep.execute(CreateOutputsStep.java:51)\n\tat org.gradle.internal.execution.steps.CreateOutputsStep.execute(CreateOutputsStep.java:29)\n\tat org.gradle.internal.execution.steps.CaptureStateAfterExecutionStep.execute(CaptureStateAfterExecutionStep.java:54)\n\tat org.gradle.internal.execution.steps.CaptureStateAfterExecutionStep.execute(CaptureStateAfterExecutionStep.java:35)\n\tat org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:60)\n\tat org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:27)\n\tat org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:174)\n\tat org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)\n\tat org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:45)\n\tat org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:40)\n\tat org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:29)\n\tat org.gradle.internal.execution.steps.RecordOutputsStep.execute(RecordOutputsStep.java:36)\n\tat org.gradle.internal.execution.steps.RecordOutputsStep.execute(RecordOutputsStep.java:22)\n\tat org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:99)\n\tat org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$0(SkipUpToDateStep.java:92)\n\tat java.base/java.util.Optional.map(Optional.java:258)\n\tat org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:52)\n\tat org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:36)\n\tat org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:84)\n\tat org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:41)\n\tat org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)\n\tat org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)\n\tat org.gradle.internal.execution.steps.ResolveCachingStateStep.execute(ResolveCachingStateStep.java:91)\n\tat org.gradle.internal.execution.steps.ResolveCachingStateStep.execute(ResolveCachingStateStep.java:49)\n\tat org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:78)\n\tat org.gradle.internal.execution.steps.CaptureStateBeforeExecutionStep.execute(CaptureStateBeforeExecutionStep.java:49)\n\tat org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)\n\tat org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:50)\n\tat org.gradle.internal.execution.steps.SkipEmptyWorkStep.lambda$execute$2(SkipEmptyWorkStep.java:86)\n\tat java.base/java.util.Optional.orElseGet(Optional.java:362)\n\tat org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:86)\n\tat org.gradle.internal.execution.steps.SkipEmptyWorkStep.execute(SkipEmptyWorkStep.java:32)\n\tat org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)\n\tat org.gradle.internal.execution.steps.LoadExecutionStateStep.execute(LoadExecutionStateStep.java:43)\n\tat org.gradle.internal.execution.steps.LoadExecutionStateStep.execute(LoadExecutionStateStep.java:31)\n\tat org.gradle.internal.execution.steps.AssignWorkspaceStep.lambda$execute$0(AssignWorkspaceStep.java:40)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$TaskExecution$2.withWorkspace(ExecuteActionsTaskExecuter.java:283)\n\tat org.gradle.internal.execution.steps.AssignWorkspaceStep.execute(AssignWorkspaceStep.java:40)\n\tat org.gradle.internal.execution.steps.AssignWorkspaceStep.execute(AssignWorkspaceStep.java:30)\n\tat org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:37)\n\tat org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:27)\n\tat org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:49)\n\tat org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:35)\n\tat org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:76)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:184)\n\tat org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:173)\n\tat org.gradle.api.internal.tasks.execution.CleanupStaleOutputsExecuter.execute(CleanupStaleOutputsExecuter.java:109)\n\tat org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)\n\tat org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)\n\tat org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)\n\tat org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:56)\n\tat org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)\n\tat org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)\n\tat org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)\n\tat org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:75)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner$3.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:153)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:68)\n\tat org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:62)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.lambda$call$2(DefaultBuildOperationExecutor.java:76)\n\tat org.gradle.internal.operations.UnmanagedBuildOperationWrapper.callWithUnmanagedSupport(UnmanagedBuildOperationWrapper.java:54)\n\tat org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:76)\n\tat org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)\n\tat org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:74)\n\tat org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:408)\n\tat org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:395)\n\tat org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:388)\n\tat org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:374)\n\tat org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.lambda$run$0(DefaultPlanExecutor.java:127)\n\tat org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:191)\n\tat org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.executeNextNode(DefaultPlanExecutor.java:182)\n\tat org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:124)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\n",
+                "projectUrl": "0.41.0",
+                "name": "ktlint"
+            }
+        ],
+        "count": 10
+    },
+    "count": 22
+}

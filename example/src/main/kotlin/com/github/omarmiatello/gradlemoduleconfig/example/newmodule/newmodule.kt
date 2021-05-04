@@ -1,6 +1,6 @@
 @file:Suppress("ComplexMethod", "TopLevelPropertyNaming", "WildcardImport", "MaxLineLength")
 
-package com.github.omarmiatello.gradlemoduleconfig.example
+package com.github.omarmiatello.gradlemoduleconfig.example.newmodule
 
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.App
 import com.github.omarmiatello.gradlemoduleconfig.dataclass.GradleConfig

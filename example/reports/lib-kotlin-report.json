@@ -1,0 +1,83 @@
+{
+    "current": {
+        "dependencies": [
+            {
+                "group": "junit",
+                "userReason": null,
+                "version": "4.13.2",
+                "projectUrl": "http://junit.org",
+                "name": "junit"
+            }
+        ],
+        "count": 1
+    },
+    "gradle": {
+        "current": {
+            "version": "7.0",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "nightly": {
+            "version": "",
+            "reason": "update check disabled",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "enabled": true,
+        "releaseCandidate": {
+            "version": "6.9-rc-1",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "running": {
+            "version": "7.0",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        }
+    },
+    "exceeded": {
+        "dependencies": [
+            
+        ],
+        "count": 0
+    },
+    "outdated": {
+        "dependencies": [
+            {
+                "group": "com.pinterest",
+                "available": {
+                    "release": null,
+                    "milestone": "0.41.0",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "0.40.0",
+                "projectUrl": "https://github.com/pinterest/ktlint",
+                "name": "ktlint"
+            },
+            {
+                "group": "org.jetbrains.kotlin",
+                "available": {
+                    "release": null,
+                    "milestone": "1.5.0",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.4.32",
+                "projectUrl": "https://kotlinlang.org/",
+                "name": "kotlin-scripting-compiler-embeddable"
+            }
+        ],
+        "count": 2
+    },
+    "unresolved": {
+        "dependencies": [
+            
+        ],
+        "count": 0
+    },
+    "count": 3
+}

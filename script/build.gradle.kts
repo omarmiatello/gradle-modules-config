@@ -1,4 +1,4 @@
-version = "1.0.3"
+version = "1.0.4"
 description = "This script will take care of creating the gradle modules"
 
 plugins {

@@ -1,0 +1,258 @@
+{
+    "current": {
+        "dependencies": [
+            {
+                "group": "androidx.lifecycle",
+                "userReason": null,
+                "version": "1.0.0-alpha04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/lifecycle#1.0.0-alpha04",
+                "name": "lifecycle-viewmodel-compose"
+            },
+            {
+                "group": "junit",
+                "userReason": null,
+                "version": "4.13.2",
+                "projectUrl": "http://junit.org",
+                "name": "junit"
+            }
+        ],
+        "count": 2
+    },
+    "gradle": {
+        "current": {
+            "version": "7.0",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "nightly": {
+            "version": "",
+            "reason": "update check disabled",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "enabled": true,
+        "releaseCandidate": {
+            "version": "6.9-rc-1",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        },
+        "running": {
+            "version": "7.0",
+            "reason": "",
+            "isUpdateAvailable": false,
+            "isFailure": false
+        }
+    },
+    "exceeded": {
+        "dependencies": [
+            
+        ],
+        "count": 0
+    },
+    "outdated": {
+        "dependencies": [
+            {
+                "group": "androidx.activity",
+                "available": {
+                    "release": null,
+                    "milestone": "1.3.0-alpha07",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.3.0-alpha06",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/activity#1.3.0-alpha07",
+                "name": "activity-compose"
+            },
+            {
+                "group": "androidx.appcompat",
+                "available": {
+                    "release": null,
+                    "milestone": "1.3.0-rc01",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.2.0",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/appcompat#1.3.0-rc01",
+                "name": "appcompat"
+            },
+            {
+                "group": "androidx.compose.compiler",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.0.0-beta05",
+                "name": "compiler"
+            },
+            {
+                "group": "androidx.compose.foundation",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-foundation#1.0.0-beta05",
+                "name": "foundation"
+            },
+            {
+                "group": "androidx.compose.material",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-material#1.0.0-beta05",
+                "name": "material"
+            },
+            {
+                "group": "androidx.compose.material",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-material#1.0.0-beta05",
+                "name": "material-icons-core"
+            },
+            {
+                "group": "androidx.compose.material",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-material#1.0.0-beta05",
+                "name": "material-icons-extended"
+            },
+            {
+                "group": "androidx.compose.ui",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-ui#1.0.0-beta05",
+                "name": "ui"
+            },
+            {
+                "group": "androidx.compose.ui",
+                "available": {
+                    "release": null,
+                    "milestone": "1.0.0-beta05",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.0.0-beta04",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/compose-ui#1.0.0-beta05",
+                "name": "ui-tooling"
+            },
+            {
+                "group": "androidx.core",
+                "available": {
+                    "release": null,
+                    "milestone": "1.6.0-alpha02",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.3.2",
+                "projectUrl": "https://developer.android.com/jetpack/androidx/releases/core#1.6.0-alpha02",
+                "name": "core-ktx"
+            },
+            {
+                "group": "androidx.test",
+                "available": {
+                    "release": null,
+                    "milestone": "1.4.0-alpha06",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.3.0",
+                "projectUrl": "https://developer.android.com/testing",
+                "name": "rules"
+            },
+            {
+                "group": "androidx.test.espresso",
+                "available": {
+                    "release": null,
+                    "milestone": "3.4.0-alpha06",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "3.3.0",
+                "projectUrl": "https://developer.android.com/testing",
+                "name": "espresso-core"
+            },
+            {
+                "group": "androidx.test.ext",
+                "available": {
+                    "release": null,
+                    "milestone": "1.1.3-alpha06",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.1.2",
+                "projectUrl": "https://developer.android.com/testing",
+                "name": "junit"
+            },
+            {
+                "group": "com.google.accompanist",
+                "available": {
+                    "release": null,
+                    "milestone": "0.8.1",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "0.7.0",
+                "projectUrl": "https://github.com/google/accompanist/",
+                "name": "accompanist-coil"
+            },
+            {
+                "group": "com.pinterest",
+                "available": {
+                    "release": null,
+                    "milestone": "0.41.0",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "0.40.0",
+                "projectUrl": "https://github.com/pinterest/ktlint",
+                "name": "ktlint"
+            },
+            {
+                "group": "org.jetbrains.kotlin",
+                "available": {
+                    "release": null,
+                    "milestone": "1.5.0",
+                    "integration": null
+                },
+                "userReason": null,
+                "version": "1.4.32",
+                "projectUrl": "https://kotlinlang.org/",
+                "name": "kotlin-reflect"
+            }
+        ],
+        "count": 16
+    },
+    "unresolved": {
+        "dependencies": [
+            
+        ],
+        "count": 0
+    },
+    "count": 18
+}

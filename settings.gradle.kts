@@ -22,5 +22,6 @@ rootProject.name = "gradle-modules-config"
 include(
     "dataclass",
     "script",
+    "dependencies-update",
     "example",
 )

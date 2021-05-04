@@ -1,4 +1,4 @@
-version = "1.0.3"
+version = "1.0.4"
 
 plugins {
     id("java-library")
@@ -8,6 +8,7 @@ plugins {
 
 dependencies {
     implementation(moduleScript)
+    implementation(moduleDependenciesUpdate)
     implementation(Lib.docopt)
     testImplementation(Lib.testJunit)
 }

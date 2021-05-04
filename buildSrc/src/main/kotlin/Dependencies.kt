@@ -17,14 +17,16 @@ object Sdk {
 
 object Version {
     const val java = "11"
-    const val kotlin = "1.4.32"
+    const val kotlin = "1.5.0"
 }
 
 object Lib {
     const val docopt = "com.offbytwo:docopt:0.6.0.20150202"
+    const val kotlinxSerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0"
 
     const val testJunit = "junit:junit:4.13.2"
 }
 
 val DependencyHandler.moduleDataclass get() = project(":dataclass")
 val DependencyHandler.moduleScript get() = project(":script")
+val DependencyHandler.moduleDependenciesUpdate get() = project(":dependencies-update")
