@@ -6,9 +6,8 @@
 ![Language](https://img.shields.io/github/languages/top/omarmiatello/gradle-modules-config?color=blue&logo=kotlin)
 
 
-Define a configuration and this script will take care of creating the gradle modules
-
-Note: Could be used with Ktor
+- Define a configuration and this script will take care of creating the gradle modules
+- Check latest dependencies versions
 
 ## Setup
 
